@@ -1,0 +1,19 @@
+<title>Delete Comformation</title>
+<h1>Are you sure you want to delete this Book ?</h1>
+
+<h1>{{ object.title }}</h1>
+
+
+<h3>Published By :{{ object.publisher }}</h3>
+
+<h3> on : {{ object.publicatin_date }}</h3>
+
+<h3> It Was Liked {{ number_of_likes }} times.</h3>
+	<form method="POST" action=".">{% csrf_token %}
+
+	<h3>({{ object.views}})views<h3>
+	<input type='submit' value='Conform' class='btn btn-warning'>
+
+    <a href="{{ object.get_absolute_url }}">Cancel</a>
+</form>
+

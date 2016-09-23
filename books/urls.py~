@@ -1,0 +1,20 @@
+from django.conf.urls import url
+from . import views
+from django.conf import settings
+
+app_name = 'books'
+
+
+urlpatterns = [
+
+    url(r'^$', views.books_list, name='books'),
+    url(r'^search/$', views.search, name='search'),
+    url(r'^contact/$', views.contact, name='contact'),
+    url(r'^delete_book/(?P<book_id>\d+)/$', views.delete_book, name='delete_book'),
+
+
+]
+
+
+#if settings.DEBUG:
+#  urlpatterns +=[url(r'^debuginfo/$', views.debug),]

@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <title>BOOKS</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'books/style.css' %}" />
+    </head>
+
+    <body>
+
+        <header class="container group">
+            <div class="mymessages">
+                {% if messages %}
+            <ul class"messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif  %}>{{ message }}</li>
+        
+                 {% endfor %}
+                 {% endif %}
+            </ul>
+            </div>
+            <h1 class="logo">Follow<br> Up Application</h1>
+                <h3>August 31&ndash;26th &mdash; Qatar, Doha</h3>
+            <nav>
+                <a href="">Home</a>
+                <a href="">contact us</a>
+                <a href="">Promotion</a>
+                <a href="">Activty</a>
+                <a href="">Donate</a>
+                
+            </nav>
+        </header>
+
+
+        <section class="hero container"> 
+            <h2>Dedicated to the creaft of building websites</h2>
+            <p>Every year the world is moving very fast to new consept of development Every year the world is moving very fast to new consept of development Every year the world is moving very fast to new consept of development Every year the world is moving very fast to new consept of development</p>
+
+        <a class="btn btn-alt" href="">Add</a>
+        <a class="btn btn-alt" href="">Edit</a>
+        <a class="btn btn-alt" href="">Remove</a>
+        <a class="btn btn-alt" href="">Search</a>
+        <a class="btn btn-alt" href="">Asign</a>
+        <a class="btn btn-alt" href="">Suspend</a>
+        <a class="btn btn-alt" href="">register</a>
+
+        </section>
+
+        <!-- teasers -->
+
+            <section class="container"> 
+
+               <section>
+              {% if not books_list %}
+                  <h3>{{ message }}</h3>
+
+                {% else %}
+                
+                {% for book in books_list %}
+   
+                <div class="BookDetail">
+            <ul>
+                <li>
+                    <a href="">
+                    <h2><a href="{{ book.get_absolute_url }}">{{book.title}}</a></h2>
+                    {% if book.descrp %}
+                    <h4> About this book :</br>{{ book.descrp }}</h4>
+                    {% endif %}
+                    <h4> written by :{{ b_auth }}</h4>
+                    <h4>Published by :{{ book.publisher }} , on :  {{ book.publicatin_date }}</h4>
+                    <h4> viewed : ({{ book.views }}) , liked:({{ number_of_likes }})</h4>
+
+                <!--<h5> written by : {% for writer in book.authors.all %} {{ writer }} {% endfor %}-->
+                
+                </li>     
+                <a href="{% url 'books:conform_delete' book.id %}">Delete</a>
+                <a href="{% url 'books:update_book' book.id %}">update</a>
+                <a href="{% url 'books:like_this_book' book.id %}">like</a></br>
+                ..........................................................................................................
+
+               
+
+            </ul>
+
+        {% endfor %}
+        {% endif %}
+
+        
+        
+
+        <a href="mailto:maltay@gmail.com?subject=HelloWorld">EmailMe</a>
+
+        <a href="{% url 'books:add_book' %}">add a new book</a>
+        </div>
+                    <h3>world-class speakers</h3>
+                    </a>
+
+                    <p>Every year the world is moving very fast to new consept of development Every year the world is moving very fast to new consept of development</p>
+               </section>
+
+                              <section>
+                    <a href="">
+                    <h5>Schedule</h5>
+                    <h3>world-class speakers</h3>
+                    </a>
+
+                    <p>Every year the world is moving very fast to new consept of development Every year the world is moving very fast to new consept of development</p>
+               </section>
+
+                              <section>
+                    <a href="">
+                    <h5>venue</h5>
+                    <h3>world-class speakers</h3>
+                    </a>
+
+                    <p>Every year the world is moving very fast to new consept of development Every year the world is moving very fast to new consept of development</p>
+               </section>
+           </section>
+
+
+
+        
+
+  
+
+
+        
+
+    <a href="#top">Back</a>
+    <footer class="container">
+        <small>&copy; FollowUp</small>
+
+                                <nav>
+                <a href="">Home</a>
+                <a href="">contact us</a>
+                <a href="">Promotion</a>
+                <a href="">Activty</a>
+                <a href="">Donate</a>
+            </nav>
+
+    </footer>
+
+    
+</body>
+</html>
+

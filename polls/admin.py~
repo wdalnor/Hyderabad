@@ -1,0 +1,10 @@
+from django.contrib import admin
+
+from .models import Question, Choice
+
+class NotificationAdmin(admin.ModelAdmin):
+
+    class Meta:
+		model = Notification
+
+    admin.site.register(Notification)

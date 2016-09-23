@@ -1,0 +1,134 @@
+from django.shortcuts import render, get_object_or_404
+from .models import Book, Author
+from django.http import HttpResponseRedirect
+from books.forms import ContactForm
+from django.core.mail import send_mail
+from django.template import RequestContext
+from django.contrib import messages
+from django.conf import settings
+from .forms import UserForm
+
+
+
+
+def books_list(request):
+    
+    books_list = Book.objects.order_by('-publicatin_date')[:5]
+    return render(request, 'books/index.html', {'books_list': books_list,})
+
+
+def delete_book(request, book_id):
+    deleted_book = get_object_or_404(Book, id=book_id)
+    deleted_book.delete()
+    messages.add_message(request, settings.DELETE_MESSAGE, "YOU HAVE DELETED THIS BOOK")
+    return HttpResponseRedirect('/books')
+
+
+
+def search(request):
+
+    errors = []
+    
+    if 'q' in request.GET:
+        q = request.GET['q']
+        if not q:
+            errors.append("please type something to search for")
+        elif len(q) > 3:
+            errors.append("you can't search for more than 4 charcaters")
+        else:
+            books = Book.objects.filter(title__icontains=q)
+            return render(request, 'books/search_results.html', 
+                {'books':books, 'query': q})
+    return render(request, 'books/search_form.html',
+        {'errors': errors,})
+
+
+def contact(request):
+    if request.method =='POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            send_mail(
+                cd['subject'],
+                cd['message'],
+                cd.get('email', 'someEmail@gmail.com'),
+                ['siteowner@external.com']
+            #    cd.get('email', <a class="reference external" href="mailto:'noreplay%40examble.com">'noreply@example.com</a>'),
+             #   [<a class="reference external"href="mailto:'siteowner%40examble.com">'siteowner@examble.com</a>'],
+            )
+            return HttpResponseRedirect('/contact/thanks/')
+
+    else:
+        form = ContactForm(
+            initial={'subject': 'I love you'}
+
+         )
+    return render(request, 'books/contact_form.html', {'form': form,'ip_add':request.META['REMOTE_ADDR']})
+
+
+
+def register(request):
+
+    # a boolean value telling the template that the registration was successful
+   # set to false initailly. code changes value to true whenregistration succeeds . 
+
+    #if request.session.test_cookie_worked():
+      #  print " >>>> TEST COOKIE WORKED "
+        
+
+    registered = False
+
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+        
+
+
+        #if user_form.is_valid() and profile_form.is_valid():
+
+        user = user_form.save()
+
+        # Now we hash the password with the set_password method . 
+        # once hashed  we can update the user object
+
+        user.set_password(user.password)
+
+        user.save()
+
+            # Now sort out the userprofile instance
+            # once hashed , we can update the user object
+
+            # this delay saving the model until we are ready to avoid integrity problems.
+
+
+           
+           
+            #did the user provides a profile picture?
+           #if so , we need to set the user attribute ourselves, we set commit =False.
+         
+           
+
+        return HttpResponseRedirect('/rango/')
+
+
+        registered = True
+
+     
+
+
+    else:
+        user_form = UserForm()
+       
+
+    return render(request, 'books/register.html', {'user_form': user_form,'registered': registered })
+   
+
+
+
+
+
+
+
+
+                    
+   
+

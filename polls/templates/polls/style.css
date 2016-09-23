@@ -1,0 +1,19 @@
+li a {
+
+	color: green;
+
+}
+
+
+body {
+
+
+
+
+	background-image: url('img/BGgrey.jpg'); 
+	color:#000305;
+	font-size: 87.5%;
+	font-family: Arial, 'Lucida Sans Unicode';
+	line-height: 1.5;
+	text-align: left;
+}

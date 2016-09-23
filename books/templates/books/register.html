@@ -1,0 +1,51 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+        <title>Register To Books</title>
+
+        
+         <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <div class='raw'>
+        <div class='col-md-4 col-md-offset-4'>
+        <h1>Register here</h1>
+
+
+        {% if registerd %}
+
+        Rango says : <strog> thanks you for registration </strong>
+        <a href="/rango/">Return to the home page</a></br >
+        {% else %}
+
+     
+        <form id="user_form" method="post" action="/books/register/" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+
+        {{ user_form|crispy }}
+       
+
+        <input type = "submit" name="submit" value = "Register" />
+        </form>
+
+      
+
+                
+        {% endif %}
+    </div>
+</div>
+
+
+         
+
+    </body>
+
+
+</html>

@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Popup Contact Form</title>
+<link rel = "stylesheet" type="text/css" href = "{% static 'notification/style_for_popup.css' %}"/>
+<script src="{% static 'notification/style_for_popup.js' %}"</script>
+<h1>some text</h1>
+</head>
+
+<body id="abc" style="overflow:hidden;">
+<div id="abc">
+<!--- popup div start here -->
+<div id="popupContact">
+<!-- Contact us Form -->
+<form action="#" id="form" method="post" name="form>
+<img id="close" src="notification/close.png" onclick ="div_hide()">
+<h2>Contact Us</h2>
+<hr>
+<input id="name" name="name" placeholder="Name" type="text">
+<input id="email" name"email" placeholder="Email" type="text">
+<textarea id="msg" name="message" placeholder=Message"></textarea>
+<a href="javascript:%20check_empty()" id="submit">Send</a>
+</form>
+</div>
+<!-- popup div ends here -->
+<!-- display popup Button -->
+<h1>Click Button To Popup Form Using JavaScript</h1>
+<button id="popup" onclick="div_show()">Popup</button>
+</body>
+
+<!-- body ends here -->
+</html>
+

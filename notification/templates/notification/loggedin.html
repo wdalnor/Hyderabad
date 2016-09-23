@@ -1,0 +1,46 @@
+{% extends "notification/base.html" %}
+{% load staticfiles %}
+{% block content%}
+
+<div>
+{{ now }}
+</div>
+<br>
+<br>
+<h4>go now</h4>
+<button id="popup" onclick="div_show()">Popup</button>
+
+
+
+
+{# this is a one line comment #}
+
+{% comment %}
+this is 
+a multiline
+comment
+{% endcomment %}
+{% ifequal user currentuser %}
+
+<h1>Hello and Welcome : {{ user }} </h1>
+{% endifequal %}
+
+
+
+{% if notifications.count > 0 %}
+
+
+
+	{% for n in notifications %}
+
+	    <h3><a href="/notification/show/{{n.id}}">{{n.title|upper}}</a></h3>{% if not forloop.last %} >> {% endif %}
+	    {% endfor %}
+
+
+
+{% endif %}
+{% endblock content %}
+
+
+
+
